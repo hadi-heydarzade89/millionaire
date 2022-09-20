@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserRoleEnum;
+use App\Enums\GameStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +13,16 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id()->index();
+            $table->unsignedBigInteger('created_by')->index();
             $table->string('name');
-            $table->string('surname');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('role')->default(UserRoleEnum::USER->value);
+            $table->unsignedBigInteger('max_allowed_questions');
+            $table->boolean('status')->default(GameStatusEnum::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('created_by')->references('id')->on('users')
+                ->cascadeOnDelete()->cascadeOnUpdate();
             $table->index(['created_at']);
         });
     }
@@ -34,6 +34,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('games');
     }
 };

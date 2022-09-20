@@ -12,13 +12,13 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('tokenable');
-            $table->string('name');
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
+        Schema::create('user_game_questions', function (Blueprint $table) {
+            $table->id()->index();
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('game_id')->index();
+            $table->unsignedInteger('question_id')->index();
+            $table->dateTimeTz('read_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('user_game_questions');
     }
 };
