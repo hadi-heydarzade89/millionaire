@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'per_page' => env('PER_PAGE', 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,6 +195,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Providers\RepositoryProvider::class,
+        \App\Providers\ServiceProvider::class,
 
     ],
 
