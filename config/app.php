@@ -17,6 +17,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'per_page' => env('PER_PAGE', 10),
+    'minimum_score' => env('MINIMUM_SCORE', 5),
+    'maximum_score' => env('MAXIMUM_SCORE', 20),
 
     /*
     |--------------------------------------------------------------------------
@@ -213,6 +215,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'admin' => App\Http\Middleware\AdminMiddleware::class,
     ])->toArray(),
 
 ];

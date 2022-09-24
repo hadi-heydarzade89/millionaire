@@ -14,11 +14,11 @@ interface GameServiceInterface
     public function getGamePaginate(): LengthAwarePaginator;
 
     /**
-     * @param array $gameData
+     * @param array<string,int,bool> $gameData
      * @param User $user
-     * @return void
+     * @return bool
      */
-    public function store(array $gameData, User $user): void;
+    public function store(array $gameData, User $user): ?int;
 
     /**
      * @param int $id

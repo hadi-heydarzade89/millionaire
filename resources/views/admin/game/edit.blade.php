@@ -1,1 +1,1 @@
-<?php
+@include('admin.game.show')

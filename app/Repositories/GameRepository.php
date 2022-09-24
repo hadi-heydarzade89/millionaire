@@ -22,10 +22,9 @@ class GameRepository extends BaseRepository implements GameRepositoryInterface
         return $this->model->where('id', $id)->first();
     }
 
-    public function store(array $data, User $user): void
+    public function store(array $data, User $user): ?int
     {
-
-        $this->model->create(array_merge($data, ['created_by' => $user->id]));
+        return $this->model->create(array_merge($data, ['created_by' => $user->id]))?->id;
     }
 
     public function update(array $data, int $gameId): void
@@ -35,6 +34,6 @@ class GameRepository extends BaseRepository implements GameRepositoryInterface
 
     public function delete(int $id): void
     {
-        $this->model->where('id',$id)->delete();
+        $this->model->where('id', $id)->delete();
     }
 }

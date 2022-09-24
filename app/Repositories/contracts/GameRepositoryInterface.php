@@ -10,9 +10,9 @@ interface GameRepositoryInterface
     /**
      * @param array $data
      * @param User $user
-     * @return void
+     * @return bool
      */
-    public function store(array $data, User $user): void;
+    public function store(array $data, User $user): ?int;
 
     /**
      * @param $id

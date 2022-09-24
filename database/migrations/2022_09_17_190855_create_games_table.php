@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->id()->index();
             $table->unsignedBigInteger('created_by')->index();
             $table->string('name');
+            $table->string('description')->nullable();
             $table->unsignedBigInteger('max_allowed_questions');
             $table->boolean('status')->default(GameStatusEnum::ACTIVE->value);
             $table->timestamps();

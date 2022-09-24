@@ -9,7 +9,6 @@ use App\Services\contracts\GameServiceInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Response;
 
 class GameController extends Controller
 {
@@ -28,7 +27,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        return view('admin.game.index', ['games' => $this->gameService->getGamePaginate()]);
+        $games = $this->gameService->getGamePaginate();
+        return view('game_index', compact('games'));
     }
 
     /**
@@ -48,7 +48,13 @@ class GameController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $this->gameService->store($request->only(array_keys($request->rules())), auth('web')->user());
+        $gameId = $this->gameService->store($request->only(array_keys($request->rules())), auth('web')->user());
+        if (is_int($gameId)) {
+            return redirect()->route('admin.games.create')->withErrors(['message' => __('Your game is created.')]);
+        } else {
+            return redirect()->back()->withErrors(['failed' => __('Your request get failed.')]);
+        }
+
     }
 
     /**
@@ -77,16 +83,17 @@ class GameController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateRequest $request
-     * @param int $gameId
+     * @param  $game
      */
-    public function update(UpdateRequest $request, int $gameId)
+    public function update($game, UpdateRequest $request)
     {
         $this->gameService->update(
             $request->name,
             $request->max_allowed_questions,
             $request->status,
-            $gameId
+            (int)$game
         );
+        return redirect()->route('public.game.index');
     }
 
     /**
@@ -97,5 +104,6 @@ class GameController extends Controller
     public function destroy(int $id)
     {
         $this->gameService->delete($id);
+        return redirect()->route('public.game.index');
     }
 }

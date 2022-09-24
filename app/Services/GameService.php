@@ -27,9 +27,9 @@ class GameService implements GameServiceInterface
     /**
      * @inheritDoc
      */
-    public function store(array $gameData, User $user): void
+    public function store(array $gameData, User $user): ?int
     {
-        $this->gameRepository->store($gameData, $user);
+        return $this->gameRepository->store($gameData, $user);
     }
 
     /**

@@ -27,10 +27,14 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|min:3',
-            'max_allowed_questions' => 'required|integer',
+            'max_allowed_questions' => 'required|integer|min:' . config('app.minimum_score') . '|max:' . config('app.maximum_score'),
+            'description' => 'nullable|max:255',
             'status' => [
                 'required',
-                Rule::in(GameStatusEnum::cases())
+                Rule::in(array_map(
+                    fn(GameStatusEnum $status) => $status->value,
+                    GameStatusEnum::cases()
+                ))
             ],
         ];
     }
