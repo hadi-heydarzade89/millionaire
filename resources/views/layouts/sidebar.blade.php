@@ -8,17 +8,27 @@
         @if($user?->role === \App\Enums\UserRoleEnum::ADMIN->value)
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                {{__('Game')}}
+                {{__('Games')}}
             </button>
             <div class="collapse show" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{{route('public.game.index')}}" class="link-dark d-inline-flex text-decoration-none rounded">{{__('Game index')}}</a></li>
-                    <li><a href="{{route('admin.games.create')}}" class="link-dark d-inline-flex text-decoration-none rounded">{{__('Create game')}}</a></li>
+                    <li><a href="{{route('public.game.index')}}" class="link-dark d-inline-flex text-decoration-none rounded">{{__('Games list')}}</a></li>
+                    <li><a href="{{route('admin.games.create')}}" class="link-dark d-inline-flex text-decoration-none rounded">{{__('Create a game')}}</a></li>
                 </ul>
             </div>
 
 
             <li class="border-top my-3"></li>
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                {{__('Questions')}}
+            </button>
+            <div class="collapse show" id="home-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{{route('admin.questions.index')}}" class="link-dark d-inline-flex text-decoration-none rounded">{{__('Questions list')}}</a></li>
+                    <li><a href="{{route('admin.questions.create')}}" class="link-dark d-inline-flex text-decoration-none rounded">{{__('Create a question')}}</a></li>
+                </ul>
+            </div>
             <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                         data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">

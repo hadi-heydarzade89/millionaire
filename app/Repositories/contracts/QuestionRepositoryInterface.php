@@ -2,40 +2,34 @@
 
 namespace App\Repositories\contracts;
 
-use App\Models\Game;
+use App\Models\Question;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 
-interface GameRepositoryInterface
+interface QuestionRepositoryInterface
 {
     /**
      * @param array $data
      * @param User $user
-     * @return bool
+     * @return void
      */
     public function store(array $data, User $user): ?int;
 
     /**
      * @param $id
-     * @return Game|null
+     * @return Question|null
      */
-    public function find($id): ?Game;
+    public function find($id): ?Question;
 
     /**
      * @param array $data
      * @param int $gameId
-     * @return void
+     * @return bool
      */
-    public function update(array $data, int $gameId): void;
+    public function update(array $data, int $gameId): bool;
 
     /**
      * @param int $id
      * @return void
      */
     public function delete(int $id): void;
-
-    /**
-     * @return Collection
-     */
-    public function getAll(): Collection;
 }

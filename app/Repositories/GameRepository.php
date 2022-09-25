@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Game;
 use App\Models\User;
 use App\Repositories\contracts\GameRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 
 class GameRepository extends BaseRepository implements GameRepositoryInterface
@@ -35,5 +36,13 @@ class GameRepository extends BaseRepository implements GameRepositoryInterface
     public function delete(int $id): void
     {
         $this->model->where('id', $id)->delete();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAll(): Collection
+    {
+        return $this->model->select(['name', 'id'])->get();
     }
 }

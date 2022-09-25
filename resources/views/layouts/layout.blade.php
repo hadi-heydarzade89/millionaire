@@ -14,8 +14,6 @@
 
 @vite(['resources/css/app.scss'])
 
-<!-- Custom styles for this template -->
-    <link href="sidebars.css" rel="stylesheet">
 </head>
 <body>
 
@@ -39,6 +37,5 @@
         crossorigin="anonymous"></script>
 
 
-<script src="sidebars.js"></script>
 </body>
 </html>

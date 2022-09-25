@@ -6,6 +6,7 @@ use App\Models\Game;
 use App\Models\User;
 use App\Repositories\contracts\GameRepositoryInterface;
 use App\Services\contracts\GameServiceInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class GameService implements GameServiceInterface
@@ -58,5 +59,10 @@ class GameService implements GameServiceInterface
     public function delete(int $id): void
     {
         $this->gameRepository->delete($id);
+    }
+
+    public function getAll(): Collection
+    {
+        return $this->gameRepository->getAll();
     }
 }

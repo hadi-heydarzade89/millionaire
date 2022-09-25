@@ -4,6 +4,7 @@ namespace App\Services\contracts;
 
 use App\Models\Game;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface GameServiceInterface
@@ -40,4 +41,9 @@ interface GameServiceInterface
      * @return void
      */
     public function delete(int $id): void;
+
+    /**
+     * @return Collection
+     */
+    public function getAll(): Collection;
 }

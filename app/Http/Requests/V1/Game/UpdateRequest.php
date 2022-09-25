@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|min:3',
-            'max_allowed_questions' => 'required|integer|min:' . config('app.minimum_score') . '|max:' . config('app.maximum_score'),
+            'max_allowed_questions' => 'required|integer|min:1|max:10',
             'description' => 'nullable|max:255',
             'status' => [
                 'required',

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Auth\AuthenticationRequest;
 
@@ -15,12 +14,8 @@ class AuthController extends Controller
 
     public function authentication(AuthenticationRequest $request)
     {
-        if ($attempt = auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (auth('web')->user()?->role === UserRoleEnum::ADMIN->value) {
-                return redirect()->route('public.game.index');
-            } else {
-                return redirect('public.game.index');
-            }
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password], true)) {
+            return redirect()->route('public.game.index');
         } else {
             return redirect()->back()->withErrors(['auth' => __('Password or email is wrong.')]);
         }

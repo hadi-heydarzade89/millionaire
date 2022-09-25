@@ -2,10 +2,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Eighth navbar example">
         <div class="container">
 
-            @if(!auth())
+            @if(!is_null(auth('web')->user()))
                 <a class="nav-link text-white" aria-current="page" href="{{route('logout')}}">{{__('Logout')}}</a>
-            @endif
-            @if(auth())
+            @else
                 <a class="nav-link text-white" aria-current="page" href="{{route('login')}}">{{__('Login')}}</a>
             @endif
             <div class="collapse navbar-collapse" id="navbarsExample07">
